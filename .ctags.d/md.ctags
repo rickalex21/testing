@@ -1,0 +1,57 @@
+#This should be taken out of ~/.ctags.d/ to avoid conflicts. This was created because at
+#the time I created a custom markdown to try to fix #2965. Now that is has been fixed I
+#don't need it no more. This is too slow, the default markdown.ctags is faster.
+
+--langdef=md
+--map-md=+.md.pdc
+
+--kinddef-md=c,chapter,chapters
+--kinddef-md=a,article,articles
+--kinddef-md=s,section,sections
+--kinddef-md=u,subesection,subesections
+--kinddef-md=l,last, last sections
+
+--_tabledef-md=toplevel
+--_tabledef-md=chapter
+--_tabledef-md=article
+--_tabledef-md=section
+--_tabledef-md=subsection
+--_tabledef-md=last
+
+--_mtable-regex-md=toplevel/\n##[ ]//{tenter=chapter}
+--_mtable-regex-md=toplevel/\n###[ ]//{tenter=article}
+--_mtable-regex-md=toplevel/\n####[ ]//{tenter=section}
+--_mtable-regex-md=toplevel/\n#####[ ]//{tenter=subsection}
+--_mtable-regex-md=toplevel/\n######[ ]//{tenter=last}
+--_mtable-regex-md=toplevel/.//
+
+--_mtable-regex-md=chapter/([a-zA-Z0-9?]+[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?)/\1/c/
+--_mtable-regex-md=chapter/\n//{tleave}
+--_mtable-regex-md=chapter/.//
+
+
+--_mtable-regex-md=article/([a-zA-Z0-9?]+[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?)/\1/a/
+--_mtable-regex-md=article/\n//{tleave}
+--_mtable-regex-md=article/.//
+
+
+--_mtable-regex-md=section/([a-zA-Z0-9?]+[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?)/\1/s/
+--_mtable-regex-md=section/\n//{tleave}
+--_mtable-regex-md=section/.//
+
+
+
+--_mtable-regex-md=subsection/([a-zA-Z0-9?]+[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?)/\1/u/
+--_mtable-regex-md=subsection/\n//{tleave}
+--_mtable-regex-md=subsection/.//
+
+
+
+--_mtable-regex-md=last/([a-zA-Z0-9?]+[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?[ ]?([a-zA-Z0-9?]+)?)/\1/l/
+--_mtable-regex-md=last/\n//{tleave}
+--_mtable-regex-md=last/.//
+
+
+--exclude=.git
+--exclude=vim.md
+

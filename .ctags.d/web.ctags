@@ -1,0 +1,72 @@
+# This is mostly to tag hugo html, js, and css files with a comment to
+# easily find files. For example {{/* team */}} would produce the tag
+# team, while {{/* baseof.html */}} would produce baseof.
+
+#Note: In hugo {{/*  */ }} is not a valid comment, they have to be {{/* */}}
+
+--langdef=web
+--map-web=+.html
+--map-web=+.css
+--map-web=+.scss
+--map-web=+.js
+
+#Only put here what you're going to capture
+--kinddef-web=t,tags,web tags
+
+# Don't need plublic becuase the folders are explicit in the command.
+--exclude=*min.js
+--exclude=*.min.js
+--exclude=*.min.css
+--exclude=*.map
+--exclude=vendor
+--exclude=dist
+--exclude=node_modules
+--exclude=yarn.lock
+--exclude=.git
+--exclude=public
+
+#Create the tables. Simple names are hugo (code,comment)
+--_tabledef-web=toplevel
+--_tabledef-web=htmlComment
+--_tabledef-web=lineComment
+--_tabledef-web=multiComment
+--_tabledef-web=htmlTag
+--_tabledef-web=tag
+--_tabledef-web=code
+--_tabledef-web=comment
+
+#Start entering the patterns
+--_mtable-regex-web=toplevel/<!--//{tenter=htmlComment}
+--_mtable-regex-web=toplevel/\/\/[ \t]*//{tenter=lineComment}
+--_mtable-regex-web=toplevel/\/\*[ \t]*//{tenter=multiComment}
+--_mtable-regex-web=toplevel/<//{tenter=htmlTag}
+--_mtable-regex-web=toplevel/\{\{\/\*[ \t]+//{tenter=tag}
+--_mtable-regex-web=toplevel/\{\{//{tenter=code}
+--_mtable-regex-web=toplevel/.//
+
+#Start capturing or leaving
+
+--_mtable-regex-web=htmlComment/-->//{tleave}
+--_mtable-regex-web=htmlComment/.//
+
+--_mtable-regex-web=htmlTag/>//{tleave}
+--_mtable-regex-web=htmlTag/.//
+
+--_mtable-regex-web=tag/[^a-zA-Z]///{tleave}
+--_mtable-regex-web=tag/([a-zA-Z]+)\.(html|scss|css|js)/\1/t/
+--_mtable-regex-web=tag/.//
+
+--_mtable-regex-web=multiComment/[^a-zA-Z]///{tleave}
+--_mtable-regex-web=lineComment/([a-zA-Z]+)\.(html|scss|css|js)/\1/t/
+--_mtable-regex-web=tag/.//
+
+--_mtable-regex-web=multiComment/[^a-zA-Z]///{tleave}
+--_mtable-regex-web=multiComment/([a-zA-Z]+)\.(html|scss|css|js)/\1/t/
+--_mtable-regex-web=multiComment/.//
+
+--_mtable-regex-web=code/\}\}//{tleave}
+--_mtable-regex-web=code/.//
+
+
+
+
